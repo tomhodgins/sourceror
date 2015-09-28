@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<!--
+  To inspect pages using a bookmarklet, create a bookmark with the following address:
+  javascript:(function(){window.open('http://staticresource.com/inspect?'+window.location.href)})();
+-->
+<head>
+  <meta charset=utf-8>
+  <title>View Source</title>
+  <meta name=viewport content="user-scalable=yes,initial-scale=1,width=device-width">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/solarized_dark.min.css" rel=stylesheet>
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500,600,700,900" rel=stylesheet>
+  <style>
+    html, body, pre, code {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -webkit-text-size-adjust: 100%;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: 'Source Code Pro', Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+      word-break: break-all;
+      word-wrap:break-word;
+      font-kerning: auto;
+      font-size: 12pt;
+      background: #002b36;
+      color: #839496;
+      margin: 0;
+    }
+    ::-moz-selection {
+      color: #002b36;
+      background: #eee8d5;
+    }
+    ::selection {
+      color: #002b36;
+      background: #eee8d5;
+    }
+  </style>
+</head>
+<body>
+  <pre><code id=output></code></pre>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+  <script>
+    var url=window.location.search.substring(1),
+        xhr=new XMLHttpRequest;
+    try {
+      xhr.open('GET',url,false)
+      xhr.send(null)
+    }
+    catch(e) {
+      xhr.open('GET','proxy.php?url='+url,false)
+      xhr.send(null)
+    }
+    if (xhr.status == 200){
+      document.getElementById('output').innerHTML = (xhr.responseText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/[ ]/g,'&nbsp;').replace(/[	]/g,'&nbsp;&nbsp;'))
+    }
+    document.title='View Src: '+url
+    if (url.split('.').pop() == 'js') {
+      document.getElementById('output').className = 'js'
+    }
+    else if (url.split('.').pop() == 'css' || url.split('.').pop() == 'eqcss') {
+      document.getElementById('output').className = 'css'
+    } else {
+      document.getElementById('output').className = ' html'
+    }
+    hljs.initHighlightingOnLoad()
+  </script>
+</body>
+</html>
