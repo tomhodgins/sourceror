@@ -19,7 +19,7 @@
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      font-family: 'Source Code Pro', Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+      font-family: 'Source Code Pro', Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace;
       word-break: break-all;
       word-wrap:break-word;
       font-kerning: auto;
@@ -39,11 +39,12 @@
   </style>
 </head>
 <body>
-  <pre><code id=output></code></pre>
+  <pre><code></code></pre>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
   <script>
-    var url=window.location.search.substring(1),
-        xhr=new XMLHttpRequest;
+    var output = document.getElementsByTagName('code')[0],
+        url = window.location.search.substring(1),
+        xhr = new XMLHttpRequest;
     try {
       xhr.open('GET',url,false)
       xhr.send(null)
@@ -52,17 +53,17 @@
       xhr.open('GET','proxy.php?url='+url,false)
       xhr.send(null)
     }
-    if (xhr.status == 200){
-      document.getElementById('output').innerHTML = (xhr.responseText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/[ ]/g,'&nbsp;').replace(/[	]/g,'&nbsp;&nbsp;'))
+    if (xhr.status==200){
+      output.innerHTML = (xhr.responseText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/[ ]/g,'&nbsp;').replace(/[	]/g,'&nbsp;&nbsp;'))
     }
-    document.title='View Src: '+url
-    if (url.split('.').pop() == 'js') {
-      document.getElementById('output').className = 'js'
+    document.title = 'View Src: '+url
+    if (url.split('.').pop()=='js'){
+      output.className = 'js'
     }
-    else if (url.split('.').pop() == 'css' || url.split('.').pop() == 'eqcss') {
-      document.getElementById('output').className = 'css'
-    } else {
-      document.getElementById('output').className = ' html'
+    else if (url.split('.').pop()=='css'||url.split('.').pop()=='eqcss'){
+      output.className = 'css'
+    } else{
+      output.className = ' html'
     }
     hljs.initHighlightingOnLoad()
   </script>
