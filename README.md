@@ -6,17 +6,17 @@ It works by loading the site using a single-line PHP proxy, then it displays the
 
 ## How to use Sourceror
 
-There are two ways to use Sourceror. I have a copy installed at [http://staticresource.com/inspect](http://staticresource.com/inspect). If I wanted to view the source code I could append it to the URL after a `?` character, like this:
+There are two ways to use Sourceror. I have a copy installed at [http://caduceus.io/inspect](http://caduceus.io/inspect). If I wanted to view the source code I could append it to the URL after a `?` character, like this:
 
-[http://staticresource.com/inspect?https://github.com/tomhodgins/sourceror](http://staticresource.com/inspect?https://github.com/tomhodgins/sourceror)
+[http://caduceus.io/inspect?https://github.com/tomhodgins/sourceror](http://caduceus.io/inspect?https://github.com/tomhodgins/sourceror)
 
 The second way to use Sourceror is by adding a bookmark to your browser (of any page) and then editing the bookmark and replacing the URL with:
 
 ```
-javascript:(function(){window.open('http://staticresource.com/inspect?'+window.location.href)})();
+javascript:(function(){window.open('http://caduceus.io/inspect?'+window.location.href)})();
 ```
 
-If you are hosting your own version of the script, you'll want to replace the reference to `http://staticresource.com` with your own domain.
+If you are hosting your own version of the script, you'll want to replace the reference to `http://caduceus.io` with your own domain.
 
 ## Why to use Sourceror
 
